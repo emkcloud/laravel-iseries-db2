@@ -1,0 +1,26 @@
+{
+	"preset": "laravel",
+
+    "rules":
+    {
+        "curly_braces_position":
+        {
+            "control_structures_opening_brace": "next_line_unless_newline_at_signature_end",
+            "functions_opening_brace": "next_line_unless_newline_at_signature_end",
+            "classes_opening_brace": "next_line_unless_newline_at_signature_end",
+            "anonymous_classes_opening_brace": "next_line_unless_newline_at_signature_end",
+            "anonymous_functions_opening_brace": "next_line_unless_newline_at_signature_end"
+        }
+    },
+
+    "exclude": [
+		"docs/",
+		"examples/",
+		"vendor/"
+	],
+
+    "notPath": [
+		"examples/connection.php",
+		"examples/migtation.php"
+    ]
+}

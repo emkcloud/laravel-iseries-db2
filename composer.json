@@ -1,0 +1,57 @@
+{
+    "name": "emkcloud/laravel-iseries-db2",
+    "description": "Laravel Driver for DB2 on IBM iSeries",
+    "keywords": [
+        "as400",
+        "database",
+        "db2",
+        "driver",
+        "ibm",
+        "iseries",
+        "laravel",
+        "odbc",
+        "pdo"
+    ],
+    "homepage": "https://github.com/emkcloud/laravel-iseries-db2",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Massimo Della Rovere",
+            "email": "dellarovere@duck.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Emkcloud\\IseriesDb2\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^12.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Emkcloud\\IseriesDb2\\Providers\\IseriesDb2ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "laravel/pint": "^1.22",
+        "pestphp/pest": "^3.8",
+        "orchestra/testbench": "^10.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
