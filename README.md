@@ -22,7 +22,7 @@ A modern DB2 driver for Laravel, supporting IBM i (iSeries) systems using ODBC. 
 ## Installation
 
 ```bash
-composer require emkcloud/iseries-db2
+composer require emkcloud/laravel-iseries-db2
 ```
 
 ## Configuration
