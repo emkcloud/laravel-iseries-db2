@@ -1,4 +1,4 @@
-# iseries-db2
+# laravel-iseries-db2
 
 **Laravel Driver for DB2 on IBM iSeries (AS/400)**  
 
