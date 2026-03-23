@@ -6,7 +6,7 @@ A modern DB2 driver for Laravel, supporting IBM i (iSeries) systems using ODBC. 
 
 ## Features
 
-- Laravel 12+ support
+- Laravel ^12.0|^13.0
 - Compatible with IBM iSeries DB2 >= 7.1
 - Compatible with `artisan db:table`
 - Compatible with migration commands
