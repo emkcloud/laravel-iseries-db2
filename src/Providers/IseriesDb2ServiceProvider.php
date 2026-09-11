@@ -19,6 +19,8 @@ class IseriesDb2ServiceProvider extends ServiceProvider
         {
             DB::extend(IseriesDb2Driver::NAME, function ($config, $name)
             {
+                $config['name'] ??= $name;
+
                 $connector = app(IseriesDb2Connector::class)->connect($config);
 
                 $connection = (new IseriesDb2Connection(

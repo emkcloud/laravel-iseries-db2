@@ -103,7 +103,17 @@ class IseriesDb2Connection extends Connection
      */
     public function getName(): ?string
     {
-        return $this->name;
+        return $this->name ?? $this->getConfig('name');
+    }
+
+    /**
+     * Get the connection name with its read / write type.
+     */
+    public function getNameWithReadWriteType(): ?string
+    {
+        $name = $this->getName().($this->readWriteType ? '::'.$this->readWriteType : '');
+
+        return $name === '' ? null : $name;
     }
 
     /**
