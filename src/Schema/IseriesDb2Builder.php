@@ -57,4 +57,35 @@ class IseriesDb2Builder extends Builder
     {
         return collect($this->getSchemas())->pluck('schema_name');
     }
+
+    /**
+     * Check if an index exists, ignoring case (iSeries names are uppercase).
+     */
+    public function hasIndex($table, $index, $type = null)
+    {
+        $type = is_null($type) ? $type : strtolower($type);
+
+        $index = is_string($index)
+            ? strtoupper($index)
+            : array_map('strtoupper', (array) $index);
+
+        foreach ($this->getIndexes($table) as $value)
+        {
+            $typeMatches = is_null($type)
+                || ($type === 'primary' && $value['primary'])
+                || ($type === 'unique' && $value['unique'])
+                || $type === $value['type'];
+
+            $nameMatches = is_string($index)
+                ? strtoupper($value['name']) === $index
+                : array_map('strtoupper', $value['columns']) === $index;
+
+            if ($nameMatches && $typeMatches)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
