@@ -263,7 +263,7 @@ class IseriesDb2SchemaGrammar extends Grammar
     public function compileDropIfExists(IseriesDb2Blueprint $blueprint, Fluent $command)
     {
         return sprintf(IseriesDb2SQLCompile::compileDropIfExists(),
-            $this->wrapTable($blueprint)
+            $this->wrapTable(str_replace('/', '.', $blueprint->getTable()))
         );
     }
 
