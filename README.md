@@ -163,7 +163,7 @@ GRTOBJAUT OBJ(QSYS/ADDRPYLE) OBJTYPE(*CMD) USER(MYUSER) AUT(*USE)
 GRTOBJAUT OBJ(QSYS/RMVRPYLE) OBJTYPE(*CMD) USER(MYUSER) AUT(*USE)
 ```
 
-If an automatic reply to the `CPF32B2` message is configured directly on the central server, this warning can be ignored. If you enable automation on the central system, you must set the environment variable to false.
+If an automatic reply to the `CPA32B2` message is configured directly on the central server, this warning can be ignored. If you enable automation on the central system, you must set the environment variable to false.
 
 ```ini
 ISERIES_ODBC_REPLY_AUTOMATIC=false
