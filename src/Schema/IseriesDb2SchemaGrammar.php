@@ -189,6 +189,8 @@ class IseriesDb2SchemaGrammar extends Grammar
      */
     public function compileAdd(Blueprint $blueprint, Fluent $command)
     {
+        $this->setCurrentTable($blueprint->getTable());
+
         return sprintf('ALTER table %s ADD %s',
             $this->wrapTable($blueprint),
             $this->getColumn($blueprint, $command->column)
@@ -212,6 +214,9 @@ class IseriesDb2SchemaGrammar extends Grammar
     public function compileCreate(IseriesDb2Blueprint $blueprint, Fluent $command)
     {
         $tabname = $this->wrapTable($blueprint);
+
+        $this->setCurrentTable($blueprint->getTable());
+
         $columns = $this->getColumns($blueprint);
 
         if ($blueprint->getSystemName() && $this->isNotValidAs400ObjectName($tabname))
@@ -454,13 +459,6 @@ class IseriesDb2SchemaGrammar extends Grammar
         return sprintf(IseriesDb2SQLCompile::compileUnique(),
             $indexname, $table, $this->columnize($command->columns)
         );
-
-        $table = $this->wrapTable($blueprint);
-
-        return sprintf(IseriesDb2SQLCompile::compileUnique(), $table,
-            $this->removeSchemaFromIndexName($table, $command->index),
-            $this->columnize($command->columns)
-        );
     }
 
     /**
@@ -493,8 +491,10 @@ class IseriesDb2SchemaGrammar extends Grammar
      */
     protected function typeBoolean(Fluent $column)
     {
+        $tablename = Str::afterLast($this->getCurrentTable(), '.');
+
         $statement = sprintf('SMALLINT CONSTRAINT %s_%s CHECK(%s IN(0, 1))',
-            $column->type, $column->name, $column->name);
+            $tablename, $column->name, $column->name);
 
         return $statement.$this->checkFieldNumeric($column);
     }
