@@ -59,6 +59,38 @@ class IseriesDb2Builder extends Builder
     }
 
     /**
+     * Drop all views from the current library.
+     */
+    public function dropAllViews()
+    {
+        foreach ($this->getViews() as $view)
+        {
+            $this->connection->statement(sprintf('DROP VIEW %s', $this->qualifiedName($view)));
+        }
+    }
+
+    /**
+     * Drop all tables from the current library.
+     */
+    public function dropAllTables()
+    {
+        foreach ($this->getTables() as $table)
+        {
+            $this->connection->statement(sprintf('DROP TABLE %s', $this->qualifiedName($table)));
+        }
+    }
+
+    /**
+     * Get the quoted schema-qualified name of a table or view.
+     */
+    protected function qualifiedName($object)
+    {
+        return $this->connection->getSchemaGrammar()->wrapTable(
+            $object['schema'].'.'.$object['name']
+        );
+    }
+
+    /**
      * Check if an index exists, ignoring case (iSeries names are uppercase).
      */
     public function hasIndex($table, $index, $type = null)
