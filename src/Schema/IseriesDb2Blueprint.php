@@ -17,9 +17,9 @@ class IseriesDb2Blueprint extends Blueprint
      */
     public function getCommandsCollection(array $names)
     {
-        return collect($this->getCommands())->filter(function ($command)
+        return collect($this->getCommands())->filter(function ($command) use ($names)
         {
-            return in_array($command['name'] ?? '', ['dropColumn', 'renameColumn']);
+            return in_array($command['name'] ?? '', $names);
         });
     }
 
