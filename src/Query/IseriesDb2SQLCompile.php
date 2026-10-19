@@ -190,7 +190,7 @@ class IseriesDb2SQLCompile
     public static function compilePrimary(): string
     {
         return <<<'SQL'
-          ALTER TABLE %s ADD PRIMARY KEY (%s)
+          ALTER TABLE %s ADD CONSTRAINT %s PRIMARY KEY (%s)
         SQL;
     }
 

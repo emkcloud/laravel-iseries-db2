@@ -365,9 +365,12 @@ class IseriesDb2SchemaGrammar extends Grammar
      */
     public function compilePrimary(IseriesDb2Blueprint $blueprint, Fluent $command)
     {
+        $table = $this->wrapTable($blueprint);
+
+        $indexname = $this->removeSchemaFromIndexName($table, $command->index);
+
         return sprintf(IseriesDb2SQLCompile::compilePrimary(),
-            $this->wrapTable($blueprint),
-            $this->columnize($command->columns)
+            $table, $indexname, $this->columnize($command->columns)
         );
     }
 
