@@ -44,7 +44,7 @@ class IseriesDb2Blueprint extends Blueprint
      */
     public function getSystemName()
     {
-        return Str::upper($this->systemName);
+        return $this->systemName ? Str::upper($this->systemName) : null;
     }
 
     /**
