@@ -217,7 +217,7 @@ class IseriesDb2SchemaGrammar extends Grammar
 
         $this->setCurrentTable($blueprint->getTable());
 
-        $columns = $this->getColumns($blueprint);
+        $columns = array_merge($this->getColumns($blueprint), $this->getAutoIncrementPrimaryKey($blueprint));
 
         if ($blueprint->getSystemName() && $this->isNotValidAs400ObjectName($tabname))
         {
@@ -229,6 +229,28 @@ class IseriesDb2SchemaGrammar extends Grammar
         return sprintf(IseriesDb2SQLCompile::compileCreate(),
             Str::upper($tabname), implode(', ', $columns)
         );
+    }
+
+    /**
+     * Primary key for an auto-increment column when no explicit primary key is defined.
+     */
+    protected function getAutoIncrementPrimaryKey(IseriesDb2Blueprint $blueprint)
+    {
+        if (collect($blueprint->getCommands())->contains('name', 'primary'))
+        {
+            return [];
+        }
+
+        $column = collect($blueprint->getAddedColumns())->first(fn ($column) => $column->autoIncrement);
+
+        if (! $column)
+        {
+            return [];
+        }
+
+        $name = Str::lower(str_replace('.', '_', $blueprint->getTable())).'_'.$column->name.'_primary';
+
+        return [sprintf('CONSTRAINT %s PRIMARY KEY (%s)', $name, $column->name)];
     }
 
     /**
