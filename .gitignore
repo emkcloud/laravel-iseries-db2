@@ -7,3 +7,4 @@
 /.vscode/
 /.phpunit.result.cache
 /.pest.phpunit.cache
+/AGENTS.md
